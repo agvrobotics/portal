@@ -1,1 +1,1 @@
-<div class="swiper-slide menu">Menu slide</div>
+<div class="swiper-slide menu border-r-1 border-gray-300">Menu slide</div>
