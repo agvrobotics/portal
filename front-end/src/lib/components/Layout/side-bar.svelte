@@ -27,13 +27,13 @@
 </style>
 
 <div id="sidebar" class="w-[70px] flex flex-col gap-3 items-center pt-5 border-r-1 border-gray-300">
-	<div class="icon-base icon-hover {isActive(routes.home) ? 'icon-active' : ''}">
+	<div class="icon-base {isActive(routes.home) ? 'icon-active' : ''}">
 		<Home size={50} absoluteStrokeWidth color="rgb(0, 43, 103)" />
 	</div>
-	<div class="icon-base icon-hover {isActive(routes.map) ? 'icon-active' : ''}">
+	<div class="icon-base {isActive(routes.map) ? 'icon-active' : ''}">
 		<MapIcon size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
 	</div>
-	<div class="icon-base icon-hover {isActive(routes.settings) ? 'icon-active' : ''}">
+	<div class="icon-base {isActive(routes.settings) ? 'icon-active' : ''}">
 		<Settings size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
 	</div>
 </div>
