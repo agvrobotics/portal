@@ -14,7 +14,7 @@
       initialSlide: 1,
       resistanceRatio: 0,
       slideToClickedSlide: true,
-      allowTouchMove: false,
+      // allowTouchMove: false,
       on: {
         slideChangeTransitionStart(this: SwiperClass) {
           const slider = this;
