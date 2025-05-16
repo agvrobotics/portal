@@ -7,5 +7,5 @@
     </div>
     <img class="h-[50px]" src='/dekut.png' alt="logo"/>
   </div>
-  <h2>Mike</h2>
+  <div class="div mr-5 rounded-[50%] h-[60px] w-[60px] my-auto"></div>
 </header>
