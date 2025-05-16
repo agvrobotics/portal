@@ -1,5 +1,5 @@
 <script>
-  import {Button} from '$lib'
+  import {Button, Header} from '$lib'
   let email = '';
   let password = '';
   let showPassword = false;
@@ -41,31 +41,36 @@
       font-size: 0.875rem;
     }
   </style>
-<main class="h-screen flex">
-  <div class="container max-w-[600px] my-auto mx-auto">  
-    <div class="w-full">
-      <label for="email">Email</label>
-      <input class="w-full" type="email" id="email" bind:value={email}/>
-    </div>
-  
-    <div class="w-full mt-4">
-      <label for="password">Password</label>
-      <div class="password-container">
-        <input 
-          class="w-full"
-          type={showPassword ? "text" : "password"} 
-          id="password" 
-          bind:value={password} 
-        />
-        <button class="toggle-password" on:click={() => showPassword = !showPassword}>
-          {showPassword ? 'Hide' : 'Show'}
-        </button>
+<main class="h-screen">
+  <Header/>
+  <div style="height: calc(100vh - 100px);" class="flex">
+    <form class="container flex flex-col gap-4 max-w-[600px] my-auto mx-auto max-[600px]:mx-6">  
+      <h2 class="text-center text-3xl mb-4">Dekut AGV Robotics</h2>
+      <!--Email-->
+      <div class="w-full">
+        <label for="email">Email</label>
+        <input class="w-full" type="email" id="email" bind:value={email}/>
       </div>
-    </div>  
-    <Button 
-      color="primary" 
-      onClick={handleLogin} 
-      externalClass="mt-4 w-full"
-    >Log In</Button>  
+      <!--Password-->
+      <div class="w-full">
+        <label for="password">Password</label>
+        <div class="password-container">
+          <input 
+            class="w-full"
+            type={showPassword ? "text" : "password"} 
+            id="password" 
+            bind:value={password} 
+          />
+          <button class="toggle-password" on:click={() => showPassword = !showPassword}>
+            {showPassword ? 'Hide' : 'Show'}
+          </button>
+        </div>
+      </div>  
+      <Button 
+        color="primary" 
+        onClick={handleLogin} 
+        externalClass="mt-4 w-full"
+      >Log In</Button>  
+    </form>
   </div>
 </main>
