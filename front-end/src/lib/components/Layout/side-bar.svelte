@@ -1,8 +1,8 @@
 <script>
 	import { Home, Settings, MapIcon } from '@lucide/svelte';
-	import { page } from '$app/state';
+	import { page } from '$app/stores';
 
-	const currentPath = page.url.pathname;
+	$: currentPath = $page.url.pathname;
 	
 	const routes = {
 		home: '/dashboard/home',
