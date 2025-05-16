@@ -1,8 +1,8 @@
 <script>
 	import { Home, Settings, MapIcon } from '@lucide/svelte';
-	import { page } from '$app/state';
+    import { page } from '$app/stores';
 
-	const currentPath = page.url.pathname;
+    $: currentPath = $page.url.pathname;
 
 	const routes = {
 		home: '/dashboard/home',
@@ -39,17 +39,17 @@
     <div class="w-full h-[70px]"></div>
     <div class=" flex flex-col gap-3 pt-5 items-end">
         <!--Dont change pt-5-->
-        <div class="icon-base {isActive(routes.home) ? 'icon-active' : ''}">
+        <a href={routes.home}  class="icon-base {isActive(routes.home) ? 'icon-active' : ''}">
             <Home size={50} absoluteStrokeWidth color="rgb(0, 43, 103)" />
             <h2>Home</h2>
-        </div>
+        </a>
         <div class="icon-base {isActive(routes.map) ? 'icon-active' : ''}">
             <MapIcon size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
             <h2>Maps</h2>
         </div>
-        <div class="icon-base {isActive(routes.settings) ? 'icon-active' : ''}">
+        <a href={routes.settings} class="icon-base {isActive(routes.settings) ? 'icon-active' : ''}">
             <Settings size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
             <h2>Settings</h2>
-        </div>
+        </a>
     </div>
 </div>
