@@ -1,5 +1,5 @@
 <script>
-  import {Button, Logo} from '$lib'
+  import {Button} from '$lib'
   let email = '';
   let password = '';
   let showPassword = false;
@@ -42,7 +42,6 @@
     }
   </style>
 <main class="h-screen">
-  <Logo/>
   <div style="height: calc(100vh - 100px);" class="flex">
     <form class="container flex flex-col gap-4 max-w-[600px] my-auto mx-auto max-[600px]:mx-6">  
       <h2 class="text-center text-3xl mb-4">Dekut AGV Robotics</h2>
