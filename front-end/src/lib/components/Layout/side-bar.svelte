@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 
 	const currentPath = page.url.pathname;
-
+	
 	const routes = {
 		home: '/dashboard/home',
 		map: '/dashboard/maps',
@@ -30,13 +30,13 @@
 
 <div id="sidebar" class="w-[70px] flex flex-col gap-3 items-center pt-5 border-r-1 border-gray-300">
 	<!--Dont change pt-5-->
-	<div class="icon-base {isActive(routes.home) ? 'icon-active' : ''}">
+	<a href={routes.home} class="icon-base {isActive(routes.home) ? 'icon-active' : ''}">
 		<Home size={50} absoluteStrokeWidth color="rgb(0, 43, 103)" />
-	</div>
+	</a>
 	<div class="icon-base {isActive(routes.map) ? 'icon-active' : ''}">
 		<MapIcon size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
 	</div>
-	<div class="icon-base {isActive(routes.settings) ? 'icon-active' : ''}">
+	<a href={routes.settings} class="icon-base {isActive(routes.settings) ? 'icon-active' : ''}">
 		<Settings size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
-	</div>
+	</a>
 </div>
