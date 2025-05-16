@@ -1,4 +1,4 @@
-<header class="w-full flex justify-between h-[70px] ">
+<header class="w-full flex justify-between h-[70px] border-b-1 border-gray-300">
   <div class="flex">
     <div class="menu-button">
       <div class="bar"></div>

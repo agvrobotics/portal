@@ -63,7 +63,7 @@
       <Header />
       <main class="h-full flex">
         <SideBar/>
-        <div id="children" class="bg-amber-300 flex-grow">
+        <div id="children" class="flex-grow">
           <slot/>
         </div>
       </main>
