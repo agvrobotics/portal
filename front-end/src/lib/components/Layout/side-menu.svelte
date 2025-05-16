@@ -43,10 +43,10 @@
             <Home size={50} absoluteStrokeWidth color="rgb(0, 43, 103)" />
             <h2>Home</h2>
         </a>
-        <div class="icon-base {isActive(routes.map) ? 'icon-active' : ''}">
+        <a href={routes.map} class="icon-base {isActive(routes.map) ? 'icon-active' : ''}">
             <MapIcon size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
             <h2>Maps</h2>
-        </div>
+        </a>
         <a href={routes.settings} class="icon-base {isActive(routes.settings) ? 'icon-active' : ''}">
             <Settings size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
             <h2>Settings</h2>
