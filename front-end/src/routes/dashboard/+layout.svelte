@@ -3,8 +3,6 @@
   import { Header, SideMenu, SideBar } from '$lib';
   import Swiper, { Swiper as SwiperClass } from 'swiper';
 
-  export let children;
-
   let swiper: SwiperClass;
 
   onMount(() => {
@@ -66,7 +64,7 @@
       <main class="h-full flex">
         <SideBar/>
         <div id="children" class="bg-amber-300 flex-grow">
-          <svelte:component this={children} />
+          <slot/>
         </div>
       </main>
     </div>
