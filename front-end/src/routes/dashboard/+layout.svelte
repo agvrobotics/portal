@@ -1,5 +1,6 @@
 <script>
 	import './layout.css';
+  import {Header, SideMenu,SideBar} from '$lib'
 	let { children } = $props();
 </script>
 <svelte:head>
@@ -8,14 +9,15 @@
 
 <div class="swiper">
 	<div class="swiper-wrapper">
-		<div class="swiper-slide menu">Menu slide</div>
-		<div class="swiper-slide content">
-		<div class="menu-button">
-			<div class="bar"></div>
-			<div class="bar"></div>
-			<div class="bar"></div>
-		</div>
-		{@render children()}
+		<SideMenu/>
+		<div class="swiper-slide">
+      <Header/>
+      <main class="h-full flex">
+          <SideBar/>
+          <div id='children' class="bg-amber-300">
+            {@render children()}
+          </div>
+     </main>
 		</div>
 	</div>
 </div>
@@ -38,12 +40,22 @@
       on: {
         slideChangeTransitionStart: function () {
           var slider = this;
+          const sidebar = document.getElementById('sidebar');
+          const children = document.getElementById('children');
           if (slider.activeIndex === 0) {
             menuButton.classList.add('cross');
+            if (sidebar) sidebar.style.display = 'none';
+            if (children) {
+              children.style.width = '100%';
+            }
             // required because of slideToClickedSlide
             menuButton.removeEventListener('click', openMenu, true);
           } else {
             menuButton.classList.remove('cross');
+            if (sidebar) sidebar.style.display = '';
+            if (children) {
+              children.style.width = 'calc(100% - 100px)';
+            }
           }
         },
         slideChangeTransitionEnd: function () {
