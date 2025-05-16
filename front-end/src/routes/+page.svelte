@@ -1,12 +1,13 @@
 <script>
-    let email = '';
-    let password = '';
-    let showPassword = false;
-  
-    const handleLogin = () => {
-      console.log("Logging in with:", email, password);
-    };
-  </script>
+  import {Button} from '$lib'
+  let email = '';
+  let password = '';
+  let showPassword = false;
+
+  const handleLogin = () => {
+    alert("Logging in");
+  };
+</script>
   
   <style>  
     label {
@@ -61,6 +62,10 @@
         </button>
       </div>
     </div>  
-    <button class="login-btn" on:click={handleLogin}>Log in</button>
+    <Button 
+      color="primary" 
+      onClick={handleLogin} 
+      externalClass="mt-4 w-full"
+    >Log In</Button>  
   </div>
 </main>
