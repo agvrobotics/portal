@@ -10,7 +10,7 @@
 		settings: '/dashboard/settings'
 	};
 
-	const isActive = (/** @type {string} */ path) => currentPath === path;
+	const isActive = (/** @type {string} */ path) => currentPath.startsWith(path);
 </script>
 
 <style>
