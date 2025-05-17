@@ -1,4 +1,6 @@
 <style>
   @import './LinearProgress.css';
 </style>
-<progress class="pure-material-progress-linear w-full"></progress>
+<div class="relative h-[0.25em]">
+  <progress class="pure-material-progress-linear w-full absolute left-0 right-0"></progress>
+</div>
