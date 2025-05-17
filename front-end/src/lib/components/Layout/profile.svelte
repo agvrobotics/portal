@@ -1,7 +1,7 @@
 <script>
   import { fade, fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
-  import { LogOut, User } from '@lucide/svelte';// User data - replace with your actual user data
+  import { LogOut, User } from '@lucide/svelte';
   let user = {
     name: 'John Doe',
     email: 'john@example.com',
@@ -19,13 +19,8 @@
     open = false;
   };
   
-  const handleMenuItemClick = (/** @type {string} */ action) => {
+  const handleLogout = (/** @type {string} */ action) => {
     handleClose();
-    console.log(`Selected: ${action}`);
-    // Add your action handlers here
-    if (action === 'Logout') {
-      // Handle logout logic
-    }
   };
 </script>
 
@@ -47,11 +42,11 @@
         </div>
         
         <ul class="menu-list">
-            <li role="none" class="menu-item" on:click={() => handleMenuItemClick()}>
+            <a href='/dashboard/profile' class="menu-item" on:click={() => handleClose()}>
               <User/>
               <span class="ml-4">Profile</span>
-            </li>
-            <li role="none" class="menu-item" on:click={() => handleMenuItemClick()}>
+            </a>
+            <li role="none" class="menu-item" on:click={() => handleLogout()}>
               <LogOut/>
               <span class="ml-4">Logout</span>
             </li>
