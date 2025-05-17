@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {CircularProgress} from '$lib'
   export let variant: 'contained' | 'outlined' | 'cyberpunk' = "contained";
   export let color = "primary";
   export let disabled = false;
@@ -24,8 +25,8 @@
     `,
     cyberpunk:'cyberpunk-button text-white',
   };
-  const disabledClasses = "bg-gray-300 text-gray-600 cursor-not-allowed";
-  const loadingClasses = "opacity-60 cursor-wait";
+  const disabledClasses = "bg-gray-300 text-gray-600 cursor-not-allowed pointer-events-none";
+  const loadingClasses = "opacity-60 cursor-wait pointer-events-none";
   
   let buttonClasses = `${baseClasses} ${variantClasses[variant]} ${disabled ? disabledClasses : ''} ${isLoading ? loadingClasses : ''}`;
 </script>
@@ -36,10 +37,7 @@
   disabled={disabled}
 >
   {#if isLoading}
-    <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"/>
-      <path d="M4 12a8 8 0 018-8m0 0a8 8 0 018 8" stroke="currentColor" stroke-width="4" fill="none" opacity="0.75"/>
-    </svg>
+    <div class="flex justify-center"><CircularProgress size={30} thickness={2}/></div>
   {/if}
   <span>{#if !isLoading} <slot></slot> {/if}</span>
 </button>
