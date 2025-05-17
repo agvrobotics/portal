@@ -1,5 +1,6 @@
 <script>
   import {Button} from '$lib'
+  import { Eye, EyeOff } from '@lucide/svelte';
   let email = '';
   let password = '';
   let showPassword = false;
@@ -36,7 +37,7 @@
       transform: translateY(-50%);
       background: none;
       border: none;
-      color: #4C60FF;
+      color: #333;
       cursor: pointer;
       font-size: 0.875rem;
     }
@@ -61,7 +62,11 @@
             bind:value={password} 
           />
           <button class="toggle-password" on:click={() => showPassword = !showPassword}>
-            {showPassword ? 'Hide' : 'Show'}
+            {#if showPassword}
+              <Eye/>
+            {:else}  
+              <EyeOff/>
+            {/if}
           </button>
         </div>
       </div>  
