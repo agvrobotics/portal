@@ -26,6 +26,11 @@
 		border-top: 1px solid rgb(185, 214, 255);
         border-bottom: 1px solid rgb(185, 214, 255);
 	}
+	@media (max-width: 768px) {
+		#sidebar{
+			display: none;
+		}
+	}
 </style>
 
 <div id="sidebar" class="w-[70px] flex flex-col gap-3 items-center pt-5 border-r-1 border-gray-300">
