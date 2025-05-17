@@ -2,6 +2,8 @@
   import { fade, fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
   import { LogOut, User } from '@lucide/svelte';
+  import { isLoading } from '$lib';
+
   let user = {
     name: 'John Doe',
     email: 'john@example.com',
@@ -21,6 +23,7 @@
   
   const handleLogout = (/** @type {string} */ action) => {
     handleClose();
+    isLoading.update(val => !val);
   };
 </script>
 
