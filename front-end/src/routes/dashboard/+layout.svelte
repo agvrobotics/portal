@@ -2,9 +2,19 @@
   import { onMount } from 'svelte';
   import { Header, SideMenu, SideBar } from '$lib';
   import Swiper, { Swiper as SwiperClass } from 'swiper';
+  import { page } from '$app/stores';
 
   let swiper: SwiperClass;
 
+  //Close Menu after navigating on phones
+  $: currentPath = $page.url.pathname;
+  const isMobile = () => window.innerWidth < 768;
+
+  $: if (swiper && currentPath && isMobile()) {
+    swiper.slideTo(1);
+  }
+
+  //Initialize Swiper
   onMount(() => {
     const menuButton = document.querySelector('.menu-button');
     const openMenu = () => swiper.slidePrev();
