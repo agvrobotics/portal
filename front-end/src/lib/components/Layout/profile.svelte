@@ -42,7 +42,7 @@
         </div>
         
         <ul class="menu-list">
-            <a href='/dashboard/profile' class="menu-item" on:click={() => handleClose()}>
+            <a href='/dashboard/settings/profile' class="menu-item" on:click={() => handleClose()}>
               <User/>
               <span class="ml-4">Profile</span>
             </a>
