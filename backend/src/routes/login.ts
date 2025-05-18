@@ -35,13 +35,17 @@ export async function loginHandler(request: Request, env: any) {
       .setExpirationTime("1h")
       .sign(SECRET);
 
-    return new Response(JSON.stringify({ message: "Login successful" }), {
+    return new Response(JSON.stringify({
+      message: "Login successful",
+      token
+    }), {
       status: 200,
       headers: {
-        "Set-Cookie": `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     });
+
+
   } catch (err) {
     console.error("Login error:", err);
     return new Response("Server error", { status: 500 });
