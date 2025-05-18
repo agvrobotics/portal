@@ -12,6 +12,11 @@ export const actions: Actions = {
       return fail(400, { error: 'Invalid form submission' });
     }
 
+    // const isTurnstileValid = await verifyTurnstile(turnstileToken);
+    // if (!isTurnstileValid) {
+    //   return fail(400, { error: 'Captcha verification failed' });
+    // }
+
     const res = await fetch('https://backend.michaelmachohi.workers.dev/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -36,3 +41,8 @@ export const actions: Actions = {
     throw redirect(303, '/dashboard/home');
   }
 };
+
+async function verifyTurnstile(token: string | any[]) {
+  // In production, verify with Cloudflare's API
+  return token && token.length > 0;
+}

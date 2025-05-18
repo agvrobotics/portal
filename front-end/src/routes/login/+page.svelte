@@ -9,6 +9,15 @@
   let showPassword = false;
   let turnstileToken = "";
   let isLoading = false;
+
+  function handleEnhance() {
+    isLoading = true;
+    // @ts-ignore
+    return async ({ update, result }) => {
+      isLoading = false;
+      await update(result);
+    };
+  }
 </script>
   
 <style>  
@@ -16,15 +25,15 @@
 </style>
 
 
-<!-- <svelte:head>
+<svelte:head>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-</svelte:head> -->
+</svelte:head>
 
 <main class="h-screen">
   <div style="height: calc(100vh - 100px);" class="flex">
     <form
       method="POST" 
-      use:enhance
+      use:enhance={handleEnhance}
       on:submit={() => isLoading = true}
       class="container flex flex-col gap-4 max-w-[600px] my-auto mx-auto max-[600px]:mx-6"
     >  
