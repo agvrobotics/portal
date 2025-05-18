@@ -4,8 +4,9 @@
   export let color = "primary";
   export let disabled = false;
   export let isLoading = false;
-  export let onClick;
+  export let onClick = () => {};
   export let externalClass = "";
+  export let submit = false;
   
   const baseClasses = `px-4 py-2 text-lg rounded-[4px] focus:outline-none`;
   
@@ -35,6 +36,7 @@
   class="{buttonClasses} {externalClass}"
   on:click={onClick}
   disabled={disabled}
+  type={ submit ? 'submit':'button'}
 >
   {#if isLoading}
     <div class="flex justify-center"><CircularProgress size={30} thickness={2}/></div>

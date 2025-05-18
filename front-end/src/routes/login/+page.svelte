@@ -9,10 +9,6 @@
   let showPassword = false;
   let turnstileToken = "";
   let isLoading = false;
-
-  const handleLogin = () => {
-    alert("Logging in");
-  };
 </script>
   
 <style>  
@@ -20,9 +16,9 @@
 </style>
 
 
-<svelte:head>
+<!-- <svelte:head>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-</svelte:head>
+</svelte:head> -->
 
 <main class="h-screen">
   <div style="height: calc(100vh - 100px);" class="flex">
@@ -35,13 +31,13 @@
       <h2 class="text-center text-3xl mb-4">Dekut 2025 AGV Robotics</h2>
 
       {#if $page.form?.error}
-        <div class="error">{$page.form.error}</div>
+        <div class="error text-red-500">{$page.form.error}</div>
       {/if}
       
       <!--Email-->
       <div class="w-full">
         <label for="email">Email</label>
-        <input class="w-full" type="email" id="email" bind:value={email}/>
+        <input class="w-full" type="email" id="email" name="email" bind:value={email}/>
       </div>
       <!--Password-->
       <div class="w-full">
@@ -51,6 +47,7 @@
             class="w-full"
             type={showPassword ? "text" : "password"} 
             id="password" 
+            name="password"
             bind:value={password} 
           />
           <button class="toggle-password" on:click|preventDefault={() => showPassword = !showPassword}>
@@ -72,8 +69,9 @@
       ></div>
       <Button 
         color="primary" 
-        onClick={handleLogin} 
+        submit={true}
         disabled={isLoading}
+        isLoading={isLoading}
         externalClass="mt-4 w-full"
       >Log In</Button>  
     </form>
