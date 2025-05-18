@@ -52,7 +52,7 @@
 <main class="h-screen">
   <div style="height: calc(100vh - 100px);" class="flex">
     <form class="container flex flex-col gap-4 max-w-[600px] my-auto mx-auto max-[600px]:mx-6">  
-      <h2 class="text-center text-3xl mb-4">Dekut AGV Robotics</h2>
+      <h2 class="text-center text-3xl mb-4">Dekut 2025 AGV Robotics</h2>
       <!--Email-->
       <div class="w-full">
         <label for="email">Email</label>

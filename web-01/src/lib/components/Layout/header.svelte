@@ -8,7 +8,7 @@
       <div class="bar"></div>
       <div class="bar"></div>
     </div>
-    <h2 class="text-3xl ml-3 max-[500px]:text-2xl">2025agvrobotics</h2>
+    <img src="/logo-black.png" alt="Logo" class="ml-4 w-15"/>
   </div>
   <Profile/>
 </header>
