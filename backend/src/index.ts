@@ -10,15 +10,21 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+import { testHandler } from './routes/test';
+import { loginHandler } from './routes/login';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		const url = new URL(request.url);
 		switch (url.pathname) {
 			case '/message':
-				return new Response('Hello, World!');
+				return new Response('Welcome to agvrobotics!');
 			case '/random':
 				return new Response(crypto.randomUUID());
+			case '/test':
+				return testHandler(request);
+			case '/login':
+				return loginHandler(request, env);
 			default:
 				return new Response('Not Found', { status: 404 });
 		}
