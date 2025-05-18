@@ -3,7 +3,7 @@ import { SignJWT } from 'jose';
 
 const SECRET = new TextEncoder().encode("super-secret-key");
 
-export async function onRequestPost(context) {
+export async function onRequestPost(context: { request: any; env: any; }) {
   const { request, env } = context;
   const body = await request.json();
   const { email, password } = body;
