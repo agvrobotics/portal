@@ -23,7 +23,7 @@ export async function loginHandler(request: Request, env: any) {
     const user = await stmt.bind(email).first();
 
     if (!user) {
-      return new Response("User not found", { status: 404 });
+      return new Response("This email is not associated with an account.", { status: 404 });
     }
 
     if (user.password !== password) {
@@ -35,13 +35,13 @@ export async function loginHandler(request: Request, env: any) {
       .setExpirationTime("1h")
       .sign(SECRET);
 
-    return new Response(JSON.stringify({
-      message: "Login successful",
-      token
-    }), {
+    if (!token) {
+      return new Response("Token generation failed", { status: 500 });
+    }
+    return new Response(token, {
       status: 200,
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       }
     });
 
