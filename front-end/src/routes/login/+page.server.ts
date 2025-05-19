@@ -29,7 +29,7 @@ export const actions: Actions = {
     }
 
     const { token } = await res.json();
-        cookies.set('auth_key', token, {
+        cookies.set('token', token, {
         path: '/',
         httpOnly: true,
         sameSite: 'strict',
