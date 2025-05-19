@@ -28,7 +28,7 @@ export const actions: Actions = {
       return fail(res.status, { error: text });
     }
 
-    const { token, message } = await res.json();
+    const { token } = await res.json();
         cookies.set('token', token, {
         path: '/',
         httpOnly: true,
@@ -36,7 +36,6 @@ export const actions: Actions = {
         secure: true,
         maxAge: 3600
     });
-    console.log('Login successful:', message);
 
     throw redirect(303, '/dashboard/home');
   }
