@@ -10,3 +10,4 @@ export {default as LinearProgress} from './components/LinearProgress.svelte'
 
 //Stores
 export { isLoading } from './stores/isloading.js';
+export {user} from './stores/user'

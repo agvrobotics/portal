@@ -2,7 +2,7 @@
  * @param {any} cookieHeader
  */
 export async function verifyJWT(cookieHeader) {
-  const res = await fetch('http://localhost:8787/jwtverify', {
+  const res = await fetch('https://backend.michaelmachohi.workers.dev/jwtverify', {
     method: 'GET',
     headers: {
       Cookie: cookieHeader

@@ -2,12 +2,7 @@
   import { fade, fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
   import { LogOut, User } from '@lucide/svelte';
-  import { isLoading } from '$lib';
-
-  let user = {
-    name: 'John Doe',
-    email: 'john@example.com',
-  };
+  import { isLoading, user } from '$lib';
 
   let anchorEl = null;
   let open = false;
@@ -40,8 +35,10 @@
     <div class="menu-backdrop" role="none" on:click|self={handleClose} transition:fade={{ duration: 150 }}>
       <div class="menu-paper" transition:fly={{ y: -10, duration: 200, easing: quintOut }}>
         <div class="p-4 border-b-1 border-gray-100 text-left">
-          <h2 class="">{user.name}</h2>
-          <p class="text-[0.9rem] text-[#666]">{user.email}</p>
+          {#if $user}
+          <h2 class="">{$user.email}</h2>
+            <p class="text-[0.9rem] text-[#666]">{$user.id}</p>
+          {/if}
         </div>
         
         <ul class="menu-list">

@@ -1,9 +1,15 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Header, SideMenu, SideBar,LinearProgress, isLoading } from '$lib';
+  import { user,Header, SideMenu, SideBar,LinearProgress, isLoading } from '$lib';
   import Swiper, { Swiper as SwiperClass } from 'swiper';
   import { page } from '$app/stores';
 
+  //Loading User data
+  export let data;
+  onMount(() => {
+    user.set(data.user.user);
+  });
+  //######################
   let swiper: SwiperClass;
 
   //Close Menu after navigating on phones
