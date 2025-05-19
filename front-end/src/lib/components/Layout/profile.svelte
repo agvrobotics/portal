@@ -19,6 +19,8 @@
   const handleLogout = (/** @type {string} */ action) => {
     handleClose();
     isLoading.update(val => !val);
+    user.set(null);
+    window.location.href = '/logout';
   };
 </script>
 
