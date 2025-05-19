@@ -38,7 +38,7 @@ export async function loginHandler(request: Request, env: any) {
     if (!token) {
       return new Response("Token generation failed", { status: 500 });
     }
-    return new Response(token, {
+    return new Response(JSON.stringify({ token }), {
       status: 200,
       headers: {
         "Content-Type": "text/plain"
