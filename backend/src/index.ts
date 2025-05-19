@@ -12,7 +12,7 @@
  */
 import { testHandler } from './routes/test';
 import { loginHandler } from './routes/login';
-
+import {verifyHandler} from './routes/jwtverify';
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		const url = new URL(request.url);
@@ -25,6 +25,8 @@ export default {
 				return testHandler(request);
 			case '/login':
 				return loginHandler(request, env);
+			case '/jwtverify':
+				return verifyHandler(request, env);	
 			default:
 				return new Response('Not Found', { status: 404 });
 		}
