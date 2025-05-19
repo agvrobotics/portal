@@ -36,6 +36,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.511.0",
+		"svelte-toast": "^1.0.0",
 		"swiper": "^11.2.6"
 	}
 }
