@@ -37,8 +37,8 @@ export let form comes from the return of the action ################Important###
   let email = '';
   let password = '';
   let showPassword = false;
-  let turnstileToken = "";
   let isLoading = false;
+  let showCaptcha = true;
 
   function handleEnhance() {
     isLoading = true;
@@ -50,6 +50,14 @@ export let form comes from the return of the action ################Important###
       await update(result);
     };
   }
+  $: if ($page.form?.error) {
+		// Hide and re-show the CAPTCHA to allow multiple submissions
+		showCaptcha = false;
+		setTimeout(() => {
+			showCaptcha = true;
+		}, 10);
+	}
+  
   
 </script>
   
@@ -101,13 +109,15 @@ export let form comes from the return of the action ################Important###
         </div>
       </div>  
       <!--Turnstile-->
-      <div
-        class="cf-turnstile"
-        data-sitekey="0x4AAAAAABdtnf8oh8_LBi9N"
-        data-callback="onVerify"
-        data-theme="light"
-        data-size='flexible'
-      ></div>
+      {#if showCaptcha}
+        <div
+          class="cf-turnstile"
+          data-sitekey={import.meta.env.VITE_TURNSTILE_SITEKEY}
+          data-callback="onVerify"
+          data-theme="light"
+          data-size='flexible'
+        ></div>
+      {/if}
       <Button 
         color="primary" 
         submit={true}
