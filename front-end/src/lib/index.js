@@ -6,7 +6,7 @@ export { default as SideMenu } from './components/Layout/side-menu.svelte';
 export {default as Profile} from './components/Layout/profile.svelte';
 export {default as CircularProgress} from './components/CircularProgress.svelte'
 export {default as LinearProgress} from './components/LinearProgress.svelte'
-
+export {default as  SiteUnderMaintenance} from './components/site-under-maintenance.svelte'
 
 //Stores
 export { isLoading } from './stores/isloading.js';

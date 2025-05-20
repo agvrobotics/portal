@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { user,Header, SideMenu, SideBar,LinearProgress, isLoading } from '$lib';
+  import { user,Header, SideMenu, SideBar,LinearProgress, isLoading, SiteUnderMaintenance } from '$lib';
   import Swiper, { Swiper as SwiperClass } from 'swiper';
   import { page } from '$app/stores';
 
@@ -60,19 +60,23 @@
 
 <style>
   @import './layout.css';
+  main{
+    height: calc(100vh - 70px);
+  }
 </style>
 <div class="swiper">
   <div class="swiper-wrapper">
     <SideMenu/>
     <div class="swiper-slide">
       <Header />
-      <main class="h-full flex">
+      <main class="flex">
         <SideBar/>
         <div id="children" class="flex-grow">
           {#if $isLoading}
             <LinearProgress />
           {/if}
-          <slot/>
+          <SiteUnderMaintenance/>
+          <!-- <slot/> -->
         </div>
       </main>
     </div>
