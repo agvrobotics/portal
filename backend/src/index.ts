@@ -1,7 +1,7 @@
 
 import { loginHandler } from './routes/login';
 import {verifyHandler} from './routes/jwtverify';
-import create from './routes/create';
+import create from './routes/test_create_person';
 export {Person} from './durable_objects/test_person';
 
 
