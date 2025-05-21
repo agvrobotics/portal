@@ -2,7 +2,7 @@
 import { loginHandler } from './routes/login';
 import {verifyHandler} from './routes/jwtverify';
 import create from './routes/create';
-export {Person} from './durable_objects/AGVWebSocket';
+export {Person} from './durable_objects/test_person';
 
 
 export default {
