@@ -112,7 +112,7 @@ export let form comes from the return of the action ################Important###
       {#if showCaptcha}
         <div
           class="cf-turnstile"
-          data-sitekey={import.meta.env.VITE_TURNSTILE_SITEKEY}
+          data-sitekey="0x4AAAAAABdtnf8oh8_LBi9N"
           data-callback="onVerify"
           data-theme="light"
           data-size='flexible'

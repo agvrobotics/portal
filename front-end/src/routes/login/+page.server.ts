@@ -1,7 +1,7 @@
 // src/routes/login/+page.server.ts
 import type { Actions, RequestEvent } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
-import { SECRET_TURNSTILE_KEY } from '$env/static/private';
+// import { SECRET_TURNSTILE_KEY } from '$env/static/private';
 
 export const actions: Actions = {
   default: async ({ request, cookies }: RequestEvent) => {
@@ -42,15 +42,15 @@ export const actions: Actions = {
   }
 };
 
-async function validateToken(token: string): Promise<boolean> {
-    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-            secret: SECRET_TURNSTILE_KEY,
-            response: token
-        })
-    });
-    const data = await response.json();
-    return data.success;
-}
+// async function validateToken(token: string): Promise<boolean> {
+//     const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//         body: new URLSearchParams({
+//             secret: SECRET_TURNSTILE_KEY,
+//             response: token
+//         })
+//     });
+//     const data = await response.json();
+//     return data.success;
+// }
