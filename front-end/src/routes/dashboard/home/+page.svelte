@@ -2,6 +2,12 @@
     import { Power,Zap, Moon, Bot, ArrowUpRight } from '@lucide/svelte';
     import {Button,toastStore, modalStore} from '$lib'
     
+    /**
+     * @typedef {Object} AGV
+     * @property {string} id
+     * @property {string} name
+     * @property {string} status
+     */
     let agvs = [
         {
             name: 'Alpha',
@@ -17,38 +23,42 @@
         });
     }
     /**
-	 * @param {{ status: string; }} agv
-	 */
+     * @param {AGV} agv
+     */
     function startAGV(agv) {
         agv.status = 'online';
         agvs = [...agvs];
         success()
     }
     /**
-	 * @param {{ status: string; }} agv
-	 */
+     * @param {AGV} agv
+     */
     function sleepAGV(agv) {
         agv.status = 'sleep';
         agvs = [...agvs];
         success()
     }
     /**
-	 * @param {{ status: string; }} agv
-	 */
-    function shutdownAGV(agv) {
+     * @param {AGV} agv
+     */
+    function completeShutdown(agv){
         agv.status = 'hibernation';
         agvs = [...agvs];
-
+        success()
+    }
+    /**
+     * @param {AGV} agv
+     */
+    function shutdownAGV(agv) {
         modalStore.set({
             open: true,
             title: 'Confirm Shutdown',
             content: 'Are you sure you want to shut down the AGV? Once shut down, it cannot be started remotely and will require manual intervention to power it back on.',
             confirmText: 'Confirm',
             cancelText: 'No',
-            onConfirm: () => success(),
+            onConfirm: () => completeShutdown(agv),
         });
-    }
-
+    } 
     const actions = [
         {
         name: 'Start',
