@@ -1,6 +1,5 @@
-<!-- src/lib/components/Modal.svelte -->
 <script>
-  import { modalStore } from '$lib/stores/modal';
+  import { modalStore, Button } from '$lib';
   import { onMount } from 'svelte';
 
   let modal;
@@ -25,27 +24,19 @@
 </script>
 
 {#if modalData.open}
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
-      <h2 class="text-xl font-semibold mb-4">{modalData.title}</h2>
-      <div class="mb-6">{modalData.content}</div>
-      <div class="flex justify-end gap-2">
-        {#if modalData.cancelText}
-        <button on:click={() => {
-            modalData.onCancel?.(); // optional chaining is fine here
-            close();
-        }}>
-            {modalData.cancelText}
-        </button>
-        {/if}
-
-        <button on:click={() => {
-        modalData.onConfirm?.();
-        close();
-        }}>
+  <div class="fixed inset-0 z-10 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
+    <div class="bg-white p-6 rounded-sm w-full max-w-lg shadow-lg">
+      <h2 class="text-xl font-semibold mb-1 text-left">{modalData.title}</h2>
+      <div class="mb-6 text-left">{modalData.content}</div>
+      <div class="flex justify-start gap-10">
+        <Button onClick={() => { modalData.onConfirm?.(); close();}}>
         {modalData.confirmText}
-        </button>
-
+        </Button>
+        {#if modalData.cancelText}
+            <button on:click={() => {modalData.onCancel?.();close();}} class='cursor-pointer'
+            >{modalData.cancelText}
+            </button>
+        {/if}
       </div>
     </div>
   </div>

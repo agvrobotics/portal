@@ -8,7 +8,7 @@
   export let externalClass = "";
   export let submit = false;
   
-  const baseClasses = `px-4 py-2 text-lg rounded-[4px] focus:outline-none`;
+  const baseClasses = `px-4 py-2 text-lg rounded-[4px] focus:outline-none cursor-pointer`;
   
   const variantClasses = {
     contained: `

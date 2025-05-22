@@ -41,12 +41,11 @@
 
         modalStore.set({
             open: true,
-            title: 'Confirm Action',
-            content: 'Are you sure you want to shut down the AGV?',
+            title: 'Confirm Shutdown',
+            content: 'Are you sure you want to shut down the AGV? Once shut down, it cannot be started remotely and will require manual intervention to power it back on.',
             confirmText: 'Confirm',
             cancelText: 'No',
             onConfirm: () => success(),
-            onCancel: () => modalStore.update(m => ({ ...m, open: false }))
         });
     }
 
