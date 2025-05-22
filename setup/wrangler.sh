@@ -11,5 +11,5 @@ npx wrangler d1 execute agv-db --remote --command="SELECT * FROM users;" #remote
 
 curl -X POST https://backend.michaelmachohi.workers.dev/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"2025agvrobotics.team@gmail.com", "password":"@team2025"}'
+  -d '{"email":"", "password":""}'
 
