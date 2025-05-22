@@ -9,18 +9,20 @@
             status: 'hibernation',
         },
     ];
-
+    function success(){
+        toastStore.set({
+            title: 'Success',
+            description: 'Operation successful',
+            type: 'success'
+        });
+    }
     /**
 	 * @param {{ status: string; }} agv
 	 */
     function startAGV(agv) {
         agv.status = 'online';
         agvs = [...agvs];
-        toastStore.set({
-            title: 'Success',
-            description: 'Data saved successfully!',
-            type: 'success'
-        });
+        success()
     }
     /**
 	 * @param {{ status: string; }} agv
@@ -28,6 +30,7 @@
     function sleepAGV(agv) {
         agv.status = 'sleep';
         agvs = [...agvs];
+        success()
     }
     /**
 	 * @param {{ status: string; }} agv
@@ -35,6 +38,7 @@
     function shutdownAGV(agv) {
         agv.status = 'hibernation';
         agvs = [...agvs];
+        success()
     }
 
     const actions = [

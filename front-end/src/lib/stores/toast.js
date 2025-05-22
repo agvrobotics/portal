@@ -1,4 +1,3 @@
-// src/lib/stores/toast.ts or .js with JSDoc
 import { writable } from 'svelte/store';
 import { toasts } from 'svelte-toasts';
 
@@ -25,5 +24,5 @@ toastStore.subscribe((toastData) => {
     theme: 'dark',
   });
 
-  toastStore.set(null); // Reset after showing
+  toastStore.set(null);
 });
