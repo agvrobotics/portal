@@ -12,7 +12,7 @@
         {
             name: 'Alpha',
             id: ' f59a2af3-1bd4-4480-99e2-d843c2a8a948',
-            status: 'hibernation',
+            status: 'off',
         },
     ];
     function success(){
@@ -42,7 +42,7 @@
      * @param {AGV} agv
      */
     function completeShutdown(agv){
-        agv.status = 'hibernation';
+        agv.status = 'off';
         agvs = [...agvs];
         success()
     }
@@ -77,7 +77,7 @@
         {
         name: 'Shutdown',
         icon: Power,
-        status: 'hibernation',
+        status: 'off',
         class: 'shutdown',
         handler: shutdownAGV,
         },
@@ -109,7 +109,7 @@
             {#if agv.status !== action.status}
                 <Button 
                 onClick={() => action.handler(agv)}
-                externalClass={`${action.class} btn ${agv.status === 'hibernation' && action.name === 'Sleep' ? 'btn-disabled' : ''}`}
+                externalClass={`${action.class} btn ${agv.status === 'off' && action.name === 'Sleep' ? 'btn-disabled' : ''}`}
                 >
                 <svelte:component this={action.icon} size="16" />
                 {action.name}

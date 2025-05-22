@@ -44,9 +44,9 @@
     color: #6366f1;
   }
   
-  .status-hibernation {
-    background-color: #fef2f2;
-    color: #ef4444;
+  .status-off {
+    background-color: #ccc;
+    color: white;
   }
   @media (max-width: 768px) {
     .grid{
