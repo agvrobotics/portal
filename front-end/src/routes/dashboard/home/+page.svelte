@@ -1,6 +1,6 @@
 <script>
     import { Power,Zap, Moon, Bot, ArrowUpRight } from '@lucide/svelte';
-    import {Button,toastStore} from '$lib'
+    import {Button,toastStore, modalStore} from '$lib'
     
     let agvs = [
         {
@@ -38,7 +38,16 @@
     function shutdownAGV(agv) {
         agv.status = 'hibernation';
         agvs = [...agvs];
-        success()
+
+        modalStore.set({
+            open: true,
+            title: 'Confirm Action',
+            content: 'Are you sure you want to shut down the AGV?',
+            confirmText: 'Confirm',
+            cancelText: 'No',
+            onConfirm: () => success(),
+            onCancel: () => modalStore.update(m => ({ ...m, open: false }))
+        });
     }
 
     const actions = [

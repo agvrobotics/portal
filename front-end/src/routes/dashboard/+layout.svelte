@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { user,Header, SideMenu, SideBar,LinearProgress, isLoading, SiteUnderMaintenance, Toast } from '$lib';
+  import { user,Header, SideMenu, SideBar,LinearProgress, isLoading, SiteUnderMaintenance, Toast, Modal } from '$lib';
   import Swiper, { Swiper as SwiperClass } from 'swiper';
   import { page } from '$app/stores';
 
@@ -77,6 +77,7 @@
           {/if}
           <!-- <SiteUnderMaintenance/> -->
           <Toast/>
+          <Modal/>
           <slot/>
         </div>
       </main>
