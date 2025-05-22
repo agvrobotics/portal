@@ -6,7 +6,7 @@
     {
       name: 'Alpha',
       id: ' f59a2af3-1bd4-4480-99e2-d843c2a8a948',
-      status: 'sleep',
+      status: 'hibernation',
     },
   ];
 
@@ -23,28 +23,28 @@
     agv.status = 'hibernation';
   }
     const actions = [
-    {
-      name: 'Start',
-      icon: Zap,
-      status: 'online',
-      class: 'start',
-      handler: (/** @type {{ status: string; }} */ agv) => agv.status = 'online',
-    },
-    {
-      name: 'Sleep',
-      icon: Moon,
-      status: 'sleep',
-      class: 'sleep',
-      handler: (/** @type {{ status: string; }} */ agv) => agv.status = 'sleep',
-    },
-    {
-      name: 'Shutdown',
-      icon: Power,
-      status: 'hibernation',
-      class: 'shutdown',
-      handler: (/** @type {{ status: string; }} */ agv) => agv.status = 'hibernation',
-    },
-  ];
+        {
+        name: 'Start',
+        icon: Zap,
+        status: 'online',
+        class: 'start',
+        handler: (/** @type {{ status: string; }} */ agv) => agv.status = 'online',
+        },
+        {
+        name: 'Sleep',
+        icon: Moon,
+        status: 'sleep',
+        class: 'sleep',
+        handler: (/** @type {{ status: string; }} */ agv) => agv.status = 'sleep',
+        },
+        {
+        name: 'Shutdown',
+        icon: Power,
+        status: 'hibernation',
+        class: 'shutdown',
+        handler: (/** @type {{ status: string; }} */ agv) => agv.status = 'hibernation',
+        },
+    ];
 </script>
 
 <style>
