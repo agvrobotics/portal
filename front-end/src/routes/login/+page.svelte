@@ -121,7 +121,6 @@ export let form comes from the return of the action ################Important###
       <Button 
         color="primary" 
         submit={true}
-        disabled={isLoading}
         isLoading={isLoading}
         externalClass="mt-4 w-full"
       >Log In</Button>  
