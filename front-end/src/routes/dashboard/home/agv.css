@@ -1,0 +1,49 @@
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .card {
+    border: 1px solid #D1D5DB;
+    border-radius: 3px;
+    padding: 1.5rem;
+    max-width: 500px;
+  }
+  .btn {
+    flex: 1;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .sleep {
+    background: #6366f1;
+  }
+  .shutdown {
+    background: #ef4444;
+  }
+    .status-indicator {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.775rem;
+    font-weight: 500;
+  }
+    .status-online {
+    background-color: #e6f7ee;
+    color: #10b981;
+  }
+  
+  .status-sleep {
+    background-color: #eef2ff;
+    color: #6366f1;
+  }
+  
+  .status-hibernation {
+    background-color: #fef2f2;
+    color: #ef4444;
+  }

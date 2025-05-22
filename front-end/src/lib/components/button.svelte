@@ -2,7 +2,7 @@
   import {CircularProgress} from '$lib'
   export let variant: 'contained' | 'outlined' | 'cyberpunk' = "contained";
   export let color = "primary";
-  export let disabled = false;
+  export let idle = false;
   export let isLoading = false;
   export let onClick = () => {};
   export let externalClass = "";
@@ -29,19 +29,19 @@
   const disabledClasses = "bg-gray-300 text-gray-600 cursor-not-allowed pointer-events-none";
   const loadingClasses = "opacity-60 cursor-wait pointer-events-none";
   
-  let buttonClasses = `${baseClasses} ${variantClasses[variant]} ${disabled ? disabledClasses : ''} ${isLoading ? loadingClasses : ''}`;
+  let buttonClasses = `${baseClasses} ${variantClasses[variant]} ${isLoading ? loadingClasses : ''}`;
 </script>
 
 <button
-  class="{buttonClasses} {externalClass}"
+  class="{buttonClasses} {idle ? disabledClasses : externalClass}"
   on:click={onClick}
-  disabled={disabled}
+  disabled={idle}
   type={ submit ? 'submit':'button'}
 >
   {#if isLoading}
     <div class="flex justify-center"><CircularProgress size={30} thickness={2}/></div>
   {/if}
-  <span>{#if !isLoading} <slot></slot> {/if}</span>
+  {#if !isLoading} <slot></slot> {/if}
 </button>
 
 <style>

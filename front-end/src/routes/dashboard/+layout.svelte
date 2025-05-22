@@ -75,8 +75,8 @@
           {#if $isLoading}
             <LinearProgress />
           {/if}
-          <SiteUnderMaintenance/>
-          <!-- <slot/> -->
+          <!-- <SiteUnderMaintenance/> -->
+          <slot/>
         </div>
       </main>
     </div>
