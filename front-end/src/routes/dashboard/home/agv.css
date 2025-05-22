@@ -25,7 +25,11 @@
   .shutdown {
     background: #ef4444;
   }
-    .status-indicator {
+  .btn-disabled {
+    background: #ddd;
+    cursor: not-allowed;
+  }
+  .status-indicator {
     display: inline-flex;
     align-items: center;
     padding: 0.15rem 0.75rem;
@@ -33,7 +37,7 @@
     font-size: 0.775rem;
     font-weight: 500;
   }
-    .status-online {
+  .status-online {
     background-color: #e6f7ee;
     color: rgb(0, 43, 103);
   }
