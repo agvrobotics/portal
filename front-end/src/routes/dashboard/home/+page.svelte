@@ -4,9 +4,9 @@
     
     let agvs = [
         {
-        name: 'Alpha',
-        id: ' f59a2af3-1bd4-4480-99e2-d843c2a8a948',
-        status: 'hibernation',
+            name: 'Alpha',
+            id: ' f59a2af3-1bd4-4480-99e2-d843c2a8a948',
+            status: 'hibernation',
         },
     ];
 
