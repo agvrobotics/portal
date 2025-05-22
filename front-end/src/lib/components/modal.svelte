@@ -24,7 +24,7 @@
 </script>
 
 {#if modalData.open}
-  <div class="fixed inset-0 z-10 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
+  <div class="fixed inset-0 z-10 flex items-center justify-center bg-[rgba(0,0,0,0.3)] p-2">
     <div class="bg-white p-6 rounded-sm w-full max-w-lg shadow-lg">
       <h2 class="text-xl font-semibold mb-1 text-left">{modalData.title}</h2>
       <div class="mb-6 text-left">{modalData.content}</div>
