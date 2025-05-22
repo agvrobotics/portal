@@ -2,8 +2,10 @@
 import { loginHandler } from './routes/login';
 import {verifyHandler} from './routes/jwtverify';
 import create from './routes/test_create_person';
-export {Person} from './durable_objects/test_person';
+import wsTestHandler from './routes/test_ws';
 
+export {Person} from './durable_objects/test_person';
+export {AgvSocket} from './durable_objects/test_agv_socket';
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -27,6 +29,12 @@ export default {
         (request as any).params = { id };
         return create(request, env, ctx);
       }
+      if (pathSegments[0] === '/ws-test' && pathSegments[1]) {
+        const id = pathSegments[1];
+        (request as any).params = { id };
+        return wsTestHandler(request as Request & { params: { id: string } }, env, ctx);
+      }
+
 
       return new Response('Not Found', { status: 404 });
     } catch (error) {
@@ -42,6 +50,7 @@ export default {
      //
      // Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
      PERSON: DurableObjectNamespace;
+     AGV_SOCKET: DurableObjectNamespace;
      //
      // Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
      // MY_BUCKET: R2Bucket;

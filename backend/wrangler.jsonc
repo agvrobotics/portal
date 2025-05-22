@@ -28,6 +28,10 @@
 	"durable_objects": {
 		"bindings": [
 			{
+			"name": "AGV_SOCKET",
+			"class_name": "AgvSocket"
+			},
+			{
 			"name": "PERSON",
 			"class_name": "Person"
 			}
@@ -37,7 +41,8 @@
 		{
 		"tag": "v1",
 			"new_classes": [
-				"Person"
+				"Person",
+				"AgvSocket"
 			]
 		}
     ]
