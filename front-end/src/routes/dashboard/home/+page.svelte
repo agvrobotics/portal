@@ -1,6 +1,6 @@
 <script>
     import { Power,Zap, Moon, Bot, ArrowUpRight } from '@lucide/svelte';
-    import {Button} from '$lib'
+    import {Button,toastStore} from '$lib'
     
     let agvs = [
         {
@@ -16,6 +16,11 @@
     function startAGV(agv) {
         agv.status = 'online';
         agvs = [...agvs];
+        toastStore.set({
+            title: 'Success',
+            description: 'Data saved successfully!',
+            type: 'success'
+        });
     }
     /**
 	 * @param {{ status: string; }} agv
