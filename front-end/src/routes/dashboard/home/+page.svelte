@@ -67,12 +67,12 @@
         <h2 class="text-left text-[1.2rem] flex ">
             <span class="flex">
                 <Bot color="rgb(0, 43, 103)"/>
-                <span class="font-bold ml-2 mr-2">{agv.name}</span>
+                <a href={`/dashboard/${agv.id}`} class="font-bold ml-2 mr-2 underline">{agv.name}</a>
             </span>
             <span class="status-indicator status-{agv.status}">Status: {agv.status}</span>
         </h2>
-        <h2 class="absolute right-5 text-[0.9rem] text-[#056DFF]  leading-4 cursor-pointer flex">
-            <span class="border-b-1 border-[#056DFF]">View details</span><ArrowUpRight size={20}/>
+        <h2 class="absolute right-5 text-[0.9rem] text-[#056DFF] flex">
+            <a href={`/dashboard/${agv.id}`} class="underline">View details</a><ArrowUpRight size={20}/>
         </h2>
         <div class="text-[#666] text-[1rem] text-left">{agv.id}</div>
         <hr class="text-[#D1D5DB]" />
