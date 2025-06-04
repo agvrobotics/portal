@@ -30,7 +30,7 @@ export let form comes from the return of the action ################Important###
 -->
 <script>
 	import { enhance } from '$app/forms';
-  import {Button} from '$lib'
+  import {Button} from '@sierra-95/svelte-ui';
   import { Eye, EyeOff } from '@lucide/svelte';
   import { page } from '$app/stores';
   

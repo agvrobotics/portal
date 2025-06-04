@@ -1,5 +1,6 @@
 <script>
-  import { modalStore, Button } from '$lib';
+  import { modalStore} from '$lib';
+  import {Button} from '@sierra-95/svelte-ui';
   import { onMount } from 'svelte';
 
   let modal;

@@ -1,7 +1,7 @@
 <script>
     import { Power,Zap, Moon, Bot, ArrowUpRight } from '@lucide/svelte';
-    import {Button,toastStore, modalStore} from '$lib'
-    
+    import {toastStore, modalStore} from '$lib'
+    import {Button} from '@sierra-95/svelte-ui';
     /**
      * @typedef {Object} AGV
      * @property {string} id
