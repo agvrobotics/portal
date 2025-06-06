@@ -64,21 +64,18 @@
         name: 'Start',
         icon: Zap,
         status: 'online',
-        class: 'start',
         handler: startAGV,
         },
         {
         name: 'Sleep',
         icon: Moon,
         status: 'sleep',
-        class: 'sleep',
         handler: sleepAGV,
         },
         {
         name: 'Shutdown',
         icon: Power,
         status: 'off',
-        class: 'shutdown',
         handler: shutdownAGV,
         },
     ];
@@ -108,8 +105,9 @@
             {#each actions as action}
             {#if agv.status !== action.status}
                 <Button 
-                onClick={() => action.handler(agv)}
-                externalClass={`${action.class} btn ${agv.status === 'off' && action.name === 'Sleep' ? 'btn-disabled' : ''}`}
+                    onClick={() => action.handler(agv)}
+                    disabled={agv.status === 'off' && action.name === 'Sleep'} 
+                    externalClass='btn'
                 >
                 <svelte:component this={action.icon} size="16" />
                 {action.name}

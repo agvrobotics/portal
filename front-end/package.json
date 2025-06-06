@@ -36,7 +36,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.511.0",
-		"@sierra-95/svelte-ui": "^1.0.0",
+		"@sierra-95/svelte-ui": "^1.2.0",
 		"svelte-toasts": "^1.1.2",
 		"swiper": "^11.2.6"
 	}
