@@ -4,7 +4,7 @@
 	import { Home, Settings, MapIcon } from '@lucide/svelte';
 	import {isLoading} from '@sierra-95/svelte-ui'
 
-	export let toggleMenu = () => {};
+	export let mobileMenuSelect;
 	export let isMenuOpen;
 
 	let size = 30;
@@ -13,7 +13,7 @@
 	afterNavigate(() => isLoading.set(false));
 
 	export const routes = {
-		home: '/home',
+		home: '/',
 		maps: '/maps',
 		settings: '/settings'
 	};
@@ -54,12 +54,10 @@
 		{#each section.items as item}
 			<a  title={item.label}
 				href={item.path}
-				on:click={toggleMenu}
+				on:click={mobileMenuSelect}
 				class="icon-base"
 				class:icon-base_radius_override={!isMenuOpen}
-				class:icon-active={
-					$page.url.pathname.startsWith(item.path)
-				}
+				class:icon-active={$page.url.pathname === item.path}
 
 			>
 				<svelte:component this={item.icon} size={size} absoluteStrokeWidth color="rgb(0, 43, 103)" />

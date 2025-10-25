@@ -2,9 +2,9 @@
   import {UserMenu} from '@sierra-95/svelte-ui'
   import { goto } from '$app/navigation';
   import {user} from '$lib'
+  
   export let toggleMenu;
-
-  const User = {
+  $: User = {
     name: $user?.id,
     email: $user?.email
   }
