@@ -1,6 +1,6 @@
 <script>
     import { Power,Zap, Moon, Bot, ArrowUpRight } from '@lucide/svelte';
-    import {toastStore, modalStore} from '$lib'
+    import {modalStore} from '$lib'
     import {Button} from '@sierra-95/svelte-ui';
     /**
      * @typedef {Object} AGV
@@ -16,11 +16,7 @@
         },
     ];
     function success(){
-        toastStore.set({
-            title: 'Success',
-            description: 'Operation successful',
-            type: 'success'
-        });
+        console.log('success')
     }
     /**
      * @param {AGV} agv

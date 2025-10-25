@@ -6,5 +6,4 @@ export {default as Toast} from './components/toast.svelte'
 export {default as Modal} from './components/modal.svelte'
 //Stores
 export {user} from './stores/user'
-export {toastStore} from './stores/toast'
 export {modalStore} from './stores/modal'
