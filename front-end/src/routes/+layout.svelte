@@ -38,7 +38,7 @@
 
 <Header toggleMenu={toggleMenu}/>
 {#if $isLoading}<LinearProgress />{/if}
-<div class="flex w-full h-[calc(100vh-70px)] overflow-hidden">
+<div class="flex w-full h-[calc(100vh-70px)]">
 	<div
 		class="h-full bg-white  border-r-1 border-gray-300"
 		class:fixed={$isMobile}
@@ -51,7 +51,7 @@
 		}
 	><Menu {isMenuOpen} mobileMenuSelect={mobileMenuSelect} />
 	</div>
-	<div class="overflow-y-auto" style={`width: ${$isMobile ? '100%' : isMenuOpen ? 'calc(100vw - 300px)' : 'calc(100vw - 70px)'};`}>
+	<div class="overflow-y-auto w-full">
 		{@render children()}
 	</div>
 </div>
