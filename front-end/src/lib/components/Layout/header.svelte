@@ -20,8 +20,8 @@
   @import './header.css';
 </style>
 <header class="w-full flex justify-between h-[70px] border-b-1 border-gray-300">
-  <div class="flex items-center">
-    <div class="menu-button" role="none" on:click={toggleMenu}>
+  <div class="flex items-center div2">
+    <div class="menu-button ml-2 cursor-pointer" role="none" on:click={toggleMenu}>
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
