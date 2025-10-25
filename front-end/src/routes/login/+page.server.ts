@@ -38,7 +38,7 @@ export const actions: Actions = {
         maxAge: 3600
     });
 
-    throw redirect(303, '/dashboard/home');
+    throw redirect(303, '/app');
   }
 };
 

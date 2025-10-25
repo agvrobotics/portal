@@ -5,9 +5,8 @@
 	$: currentPath = $page.url.pathname;
 	
 	const routes = {
-		home: '/dashboard/home',
+		home: '/',
 		map: '/dashboard/maps',
-		settings: '/dashboard/settings'
 	};
 
 	const isActive = (/** @type {string} */ path) => currentPath.startsWith(path);
@@ -40,8 +39,5 @@
 	</a>
 	<a href={routes.map} class="icon-base {isActive(routes.map) ? 'icon-active' : ''}">
 		<MapIcon size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
-	</a>
-	<a href={routes.settings} class="icon-base {isActive(routes.settings) ? 'icon-active' : ''}">
-		<Settings size={50} absoluteStrokeWidth color="rgb(0, 43, 103)"  />
 	</a>
 </div>

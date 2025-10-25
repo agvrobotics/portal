@@ -105,9 +105,9 @@
             {#each actions as action}
             {#if agv.status !== action.status}
                 <Button 
-                    onClick={() => action.handler(agv)}
+                    onclick={() => action.handler(agv)}
                     disabled={agv.status === 'off' && action.name === 'Sleep'} 
-                    externalClass='btn'
+                    style='btn'
                 >
                 <svelte:component this={action.icon} size="16" />
                 {action.name}
