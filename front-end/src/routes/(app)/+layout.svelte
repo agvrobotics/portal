@@ -11,7 +11,7 @@
 	});
 
 	onMount(() => {
-		user.set(data.user.user);
+		if(data?.user?.user) user.set(data.user.user);
 		if($isMobile) return;
 		if (typeof localStorage !== 'undefined') {
 			const stored = localStorage.getItem('isMenuOpen');

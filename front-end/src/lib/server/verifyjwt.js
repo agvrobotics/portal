@@ -1,11 +1,11 @@
 /**
- * @param {any} cookieHeader
+ * @param {any} token
  */
-export async function verifyJWT(cookieHeader) {
+export async function verifyJWT(token) {
   const res = await fetch('https://backend.michaelmachohi.workers.dev/jwtverify', {
     method: 'GET',
     headers: {
-      Cookie: cookieHeader
+      Cookie: `token=${token}`
     }
   });
 
