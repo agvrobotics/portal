@@ -1,8 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import { Home, Settings, MapIcon } from '@lucide/svelte';
 	import {isLoading} from '@sierra-95/svelte-ui'
+	import {sections} from './sections';
 
 	export let mobileMenuSelect;
 	export let isMenuOpen;
@@ -11,32 +11,6 @@
 	
 	beforeNavigate(() => isLoading.set(true));
 	afterNavigate(() => isLoading.set(false));
-
-	export const routes = {
-		home: '/',
-		maps: '/maps',
-		settings: '/settings'
-	};
-	export const sections = [
-		{
-			label: '',
-			items: [
-				{ path: routes.home, label: 'Home', icon: Home }
-			]
-		},
-		{
-			label: 'Slam-toolbox',
-			items: [
-				{ path: routes.maps, label: 'Saved Maps', icon: MapIcon },
-			]
-		},
-		{
-			label: '',
-			items: [
-				{ path: routes.settings, label: 'Settings', icon: Settings }
-			]
-		}
-	];
 </script>
 
 <style>
@@ -64,9 +38,5 @@
 				<h2 class:hidden={!isMenuOpen}>{item.label}</h2>
 			</a>
 		{/each}
-
-		{#if i === sections.length - 2}
-			<hr class="w-[80%] text-[#D1D5DB]"/>
-		{/if}
 	{/each}
 </div>
