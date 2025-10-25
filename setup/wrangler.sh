@@ -3,7 +3,7 @@ npx wrangler init
 nvm ls
 nvm use 22
 npx wrangler dev
-npx wrangler d1 create agv-db
+npx wrangler d1 create agv-db #remote+local
 npx wrangler d1 execute agv-db --file=./schema.sql
 npx wrangler d1 execute agv-db --remote --file=./schema.sql #remote
 npx wrangler d1 execute agv-db --command="SELECT * FROM users;" #local
