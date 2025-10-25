@@ -1,86 +1,60 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { user,Header, SideMenu, SideBar, isLoading, SiteUnderMaintenance, Toast, Modal } from '$lib';
-  import Swiper, { Swiper as SwiperClass } from 'swiper';
-  import { page } from '$app/stores';
-  import {LinearProgress} from '@sierra-95/svelte-ui';
-  //Loading User data
-  export let data;
+  import { user,Header, Menu} from '$lib';
+  import {LinearProgress, isMobile, isLoading} from '@sierra-95/svelte-ui';
+
+  let { children, data } = $props();
+  let isMenuOpen = $state(false);
+  
+  $effect(() => {
+		if ($isMobile) isMenuOpen = false;
+	});
+
   onMount(() => {
     user.set(data.user.user);
-  });
-  //######################
-  let swiper: SwiperClass;
-
-  //Close Menu after navigating on phones
-  $: currentPath = $page.url.pathname;
-  const isMobile = () => window.innerWidth < 768;
-
-  $: if (swiper && currentPath && isMobile()) {
-    swiper.slideTo(1);
-  }
-
-  //Initialize Swiper
-  onMount(() => {
-    const menuButton = document.querySelector('.menu-button');
-    const openMenu = () => swiper.slidePrev();
-
-    swiper = new Swiper('.swiper', {
-      slidesPerView: 'auto',
-      initialSlide: 1,
-      resistanceRatio: 0,
-      slideToClickedSlide: true,
-      // allowTouchMove: false,
-      on: {
-        slideChangeTransitionStart(this: SwiperClass) {
-          const slider = this;
-          const sidebar = document.getElementById('sidebar');
-          const children = document.getElementById('children');
-          if (slider.activeIndex === 0) {
-            menuButton?.classList.add('cross');
-            if (sidebar) sidebar.style.display = 'none';
-            if (children) children.style.width = '100%';
-            menuButton?.removeEventListener('click', openMenu, true);
-          } else {
-            menuButton?.classList.remove('cross');
-            if (sidebar) sidebar.style.display = '';
-            if (children) children.style.width = 'calc(100% - 100px)';
-          }
-        },
-        slideChangeTransitionEnd(this: SwiperClass) {
-          const slider = this;
-          if (slider.activeIndex === 1) {
-            menuButton?.addEventListener('click', openMenu, true);
-          }
-        },
-      },
-    });
-  });
+		if($isMobile) return;
+		if (typeof localStorage !== 'undefined') {
+			const stored = localStorage.getItem('isMenuOpen');
+			if (stored === null) {
+				localStorage.setItem('isMenuOpen', 'true');
+				isMenuOpen = true;
+			} else {
+				isMenuOpen = stored === 'true';
+			}
+		}
+	});
+  const toggleMenu = () => {
+		isMenuOpen = !isMenuOpen;
+    if($isMobile) return;
+		if (typeof localStorage !== 'undefined') {
+			localStorage.setItem('isMenuOpen', isMenuOpen.toString());
+		}
+	};
 </script>
 
 <style>
-  @import './layout.css';
-  main{
-    height: calc(100vh - 70px);
-  }
+	.menu-transition {
+		transition: transform 0.3s ease, width 0.3s ease;
+	}
 </style>
-<div class="swiper">
-  <div class="swiper-wrapper">
-    <SideMenu/>
-    <div class="swiper-slide">
-      <Header />
-      <main class="flex">
-        <SideBar/>
-        <div id="children" class="flex-grow">
-          {#if $isLoading}
-            <LinearProgress />
-          {/if}
-          <!-- <SiteUnderMaintenance/> -->
-          <Toast/>
-          <Modal/>
-          <slot/>
-        </div>
-      </main>
-    </div>
-  </div>
+
+<Header toggleMenu={toggleMenu}/>
+{#if $isLoading}
+	<LinearProgress />
+{/if}
+<!--Menu-->
+<div class="flex w-full h-[calc(100vh-70px)] overflow-hidden">
+	<div
+		class="menu-transition h-full bg-white overflow-hidden border-r-1 border-gray-300"
+		class:fixed={$isMobile}
+		class:left-0={$isMobile}
+		class:z-50={$isMobile}
+		style={`width: ${isMenuOpen ? '300px' : $isMobile ? '0px' : '70px'}; transform: translateX(${$isMobile && !isMenuOpen ? '-100%' : '0'})`}
+	>
+		<Menu {isMenuOpen} toggleMenu={toggleMenu}/>
+	</div>
+	<!-- Content -->
+	<div class="relative transition-all duration-300 overflow-y-auto" style={`width: ${$isMobile ? '100%' : isMenuOpen ? 'calc(100vw - 300px)' : 'calc(100vw - 70px)'};`}>
+		{@render children()}
+	</div>
 </div>
