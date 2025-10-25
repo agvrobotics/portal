@@ -43,22 +43,18 @@
 </style>
 
 <Header toggleMenu={toggleMenu}/>
-{#if $isLoading}
-	<LinearProgress />
-{/if}
-<!--Menu-->
+{#if $isLoading}<LinearProgress />{/if}
 <div class="flex w-full h-[calc(100vh-70px)] overflow-hidden">
 	<div
-		class="menu-transition h-full bg-white overflow-hidden border-r-1 border-gray-300"
+		class="menu-transition h-full bg-white  border-r-1 border-gray-300"
 		class:fixed={$isMobile}
 		class:left-0={$isMobile}
-		class:z-50={$isMobile}
+		class:z-5={$isMobile}
 		style={`width: ${isMenuOpen ? '300px' : $isMobile ? '0px' : '70px'}; transform: translateX(${$isMobile && !isMenuOpen ? '-100%' : '0'})`}
-	>
-		<Menu {isMenuOpen} mobileMenuSelect={mobileMenuSelect} />
+	><Menu {isMenuOpen} mobileMenuSelect={mobileMenuSelect} />
 	</div>
 	<!-- Content -->
-	<div class="relative transition-all duration-300 overflow-y-auto" style={`width: ${$isMobile ? '100%' : isMenuOpen ? 'calc(100vw - 300px)' : 'calc(100vw - 70px)'};`}>
+	<div class="overflow-y-auto" style={`width: ${$isMobile ? '100%' : isMenuOpen ? 'calc(100vw - 300px)' : 'calc(100vw - 70px)'};`}>
 		{@render children()}
 	</div>
 </div>

@@ -42,7 +42,7 @@
 <style>
     @import './menu.css';
 </style>
-<div id='side-menu' class="flex flex-col gap-3 items-end pt-5">
+<div class="flex flex-col gap-3 items-end pt-5">
 	{#each sections as section, i}
 		{#if section.label}
 			<div class="w-5/6">
