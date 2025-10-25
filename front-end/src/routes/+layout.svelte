@@ -36,24 +36,21 @@
 	};
 </script>
 
-<style>
-	.menu-transition {
-		transition: transform 0.3s ease, width 0.3s ease;
-	}
-</style>
-
 <Header toggleMenu={toggleMenu}/>
 {#if $isLoading}<LinearProgress />{/if}
 <div class="flex w-full h-[calc(100vh-70px)] overflow-hidden">
 	<div
-		class="menu-transition h-full bg-white  border-r-1 border-gray-300"
+		class="h-full bg-white  border-r-1 border-gray-300"
 		class:fixed={$isMobile}
 		class:left-0={$isMobile}
 		class:z-5={$isMobile}
-		style={`width: ${isMenuOpen ? '300px' : $isMobile ? '0px' : '70px'}; transform: translateX(${$isMobile && !isMenuOpen ? '-100%' : '0'})`}
+		style={
+			$isMobile
+			? `width:300px;transform: translateX(${isMenuOpen ? '0%' : '-100%'}); transition: transform 0.3s ease;`
+			: `width: ${isMenuOpen ? '300px' : '70px'}; transition: width 0.3s ease;`
+		}
 	><Menu {isMenuOpen} mobileMenuSelect={mobileMenuSelect} />
 	</div>
-	<!-- Content -->
 	<div class="overflow-y-auto" style={`width: ${$isMobile ? '100%' : isMenuOpen ? 'calc(100vw - 300px)' : 'calc(100vw - 70px)'};`}>
 		{@render children()}
 	</div>
