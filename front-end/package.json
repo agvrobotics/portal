@@ -32,6 +32,6 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.511.0",
-		"@sierra-95/svelte-ui": "^2.0.3"
+		"@sierra-95/svelte-ui": "^2.0.4"
 	}
 }
