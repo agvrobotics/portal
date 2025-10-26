@@ -28,10 +28,13 @@
     </div>
     <img src="/logo-black.png" alt="Logo" class="ml-4 w-15"/>
   </div>
-  <UserMenu
-    user={User} 
-    absolute="right"  
-    onProfile={handleProfile}
-    onLogout={handleLogout}
-  />
+  <div class="flex items-center mr-4">
+    <UserMenu
+      user={User} 
+      absolute="right"  
+      parentIconSize="40px"
+      onProfile={handleProfile}
+      onLogout={handleLogout}
+    />
+  </div>
 </header>
