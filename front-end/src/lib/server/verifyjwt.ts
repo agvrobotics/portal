@@ -1,7 +1,7 @@
 import {api} from '$env/static/private'
 
 export async function verifyJWT(token : string) {
-  const res = await fetch(`${api}auth/jwtverify`, {
+  const res = await fetch(`${api}auth/verify`, {
     method: 'GET',
     headers: {
       Cookie: `token=${token}`
