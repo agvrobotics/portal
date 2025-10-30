@@ -1,9 +1,6 @@
 import { Hono } from 'hono'
 import { SignJWT, jwtVerify } from 'jose'
-
-export interface Env {
-  DB: D1Database;
-}
+import {Env} from '../types'
 
 const auth = new Hono<{ Bindings: Env }>()
 const SECRET = new TextEncoder().encode('super-secret-key')
