@@ -7,4 +7,4 @@ export const UserSchema = z.object({
 }).openapi("User");
 
 export const LoginSchema = UserSchema.omit({id: true})
-export const JWTSchema = UserSchema.omit({password: true})
+export const AccountSchema = UserSchema.omit({password: true})

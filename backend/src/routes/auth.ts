@@ -1,17 +1,16 @@
 import { OpenAPIHono, z } from '@hono/zod-openapi';
-import { SignJWT, jwtVerify } from 'jose';
+import { SignJWT } from 'jose';
 import {eq} from 'drizzle-orm'
 //#######################################
 import {getDb} from '../db/engine/client';
 import {users} from '../db/schema';
-import {Env} from '../types';
-import {verify, login} from '../openapi/auth';
-import {LoginSchema, JWTSchema} from '../openapi/schemas/auth'
+import {Env, Variables} from '../types';
+import {authMiddleware} from './security';
+import {account, login} from '../openapi/auth';
+import {LoginSchema, AccountSchema} from '../openapi/schemas/auth'
 
-const auth = new OpenAPIHono<{ Bindings: Env }>()
+const auth = new OpenAPIHono<{ Bindings: Env ; Variables: Variables }>()
 const SECRET = new TextEncoder().encode('super-secret-key')
-
-auth.get('/', (c) => c.text('Welcome to Authentication Service'))
 
 type LoginBody = z.infer<typeof LoginSchema>
 auth.openapi(login, async (c) => {
@@ -36,28 +35,32 @@ auth.openapi(login, async (c) => {
       .setExpirationTime('1h')
       .sign(SECRET)
 
-    return c.json(token, 200)
+    c.header(
+      'Set-Cookie', 
+      `token=${token}; 
+      HttpOnly; 
+      Secure; 
+      SameSite=Strict; 
+      Path=/; 
+      Max-Age=3600`
+    )
+    return c.json('Login Successful', 200)
   } catch (err) {
     console.error('Login error:', err)
     return c.text('Internal server error', 500)
   }
 })
 
-type JWTPayload = z.infer<typeof JWTSchema>
-auth.openapi(verify, async (c) => {
+
+auth.use('*', authMiddleware);
+
+type Account = z.infer<typeof AccountSchema>
+auth.openapi(account, async (c) => {
   try {
-    const cookieHeader = c.req.header('cookie')
-    if (!cookieHeader) return c.text('Unauthorized: No cookies', 401)
-
-    const match = cookieHeader.match(/token=([^;]+)/)
-    if (!match) return c.text('Unauthorized: No token found', 401)
-
-    const token = match[1]
-    const { payload } = await jwtVerify(token, SECRET) as {payload : JWTPayload}
-
+    const user = c.get('user') as Account
     return c.json({
-      id: payload.id,
-      email: payload.email,
+      id: user.id,
+      email: user.email,
     }, 200)
   } catch (err) {
     console.error('JWT verification failed:', err)

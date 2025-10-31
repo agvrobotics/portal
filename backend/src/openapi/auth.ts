@@ -1,5 +1,5 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { JWTSchema, LoginSchema } from './schemas/auth';
+import { AccountSchema, LoginSchema } from './schemas/auth';
 
 export const login = createRoute({
   method: 'post',
@@ -16,10 +16,10 @@ export const login = createRoute({
   },
   responses: {
     200:{
-      description : "Success",
+      description : "Login Successfull",
       content: {
         "application/json":{
-          schema : z.string().openapi({description:"JWT token"})
+          schema : z.string()
         }
       }
     },
@@ -58,15 +58,15 @@ export const login = createRoute({
   }
 })
 
-export const verify = createRoute({
+export const account = createRoute({
   method: 'get',
-  path: '/verify',
+  path: '/account',
   responses: {
     200: {
-      description: 'Success',
+      description: 'Account information',
       content: {
         "application/json": {
-          schema: JWTSchema
+          schema: AccountSchema
         }
       },
     },
