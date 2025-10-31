@@ -1,10 +1,18 @@
-import { Hono } from 'hono'
-import auth from './routes/auth'
+import { OpenAPIHono } from '@hono/zod-openapi';
+import auth from './routes/auth';
 
-const app = new Hono()
+const app = new OpenAPIHono();
 
-app.get('/', (c) => c.text('AMR Cloud Console Backend'))
-app.route('/auth', auth)
+app.doc('/docs', {
+  openapi: '3.0.0',
+  info: {
+    version: '1.0.0',
+    title: 'AMR Cloud Console Backend API',
+  },
+});
 
-export default app
+app.get('/', (c) => c.text('AMR Cloud Console Backend'));
+app.route('/auth', auth);
+
+export default app;
 
