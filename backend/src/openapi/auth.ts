@@ -61,6 +61,7 @@ export const login = createRoute({
 export const account = createRoute({
   method: 'get',
   path: '/account',
+  security: [{ bearerAuth: [] }],
   responses: {
     200: {
       description: 'Account information',

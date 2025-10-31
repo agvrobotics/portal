@@ -10,7 +10,17 @@ app.doc('/docs', {
     version: '1.0.0',
     title: 'AMR Cloud Console',
   },
-});
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
+  security: [{ bearerAuth: [] }],
+} as any);
 app.get('/', swaggerUI({ url: '/docs' }))
 
 app.route('/auth', auth);
