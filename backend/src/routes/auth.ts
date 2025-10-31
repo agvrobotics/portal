@@ -1,7 +1,7 @@
 import { OpenAPIHono, z } from '@hono/zod-openapi';
 import { SignJWT, jwtVerify } from 'jose';
-//#######################################
 import {eq} from 'drizzle-orm'
+//#######################################
 import {getDb} from '../db/engine/client';
 import {users} from '../db/schema';
 import {Env} from '../types';
@@ -30,14 +30,13 @@ auth.openapi(login, async (c) => {
 
     if (!user) return c.text('This email is not associated with an account', 404);
     if (user.password !== password) return c.text('Invalid credentials', 401);
-    
 
     const token = await new SignJWT({ email: user.email, id: user.id })
       .setProtectedHeader({ alg: 'HS256' })
       .setExpirationTime('1h')
       .sign(SECRET)
 
-    return c.json(token, 201)
+    return c.json(token, 200)
   } catch (err) {
     console.error('Login error:', err)
     return c.text('Internal server error', 500)
@@ -57,8 +56,8 @@ auth.openapi(verify, async (c) => {
     const { payload } = await jwtVerify(token, SECRET) as {payload : JWTPayload}
 
     return c.json({
-        id: payload.id,
-        email: payload.email,
+      id: payload.id,
+      email: payload.email,
     }, 200)
   } catch (err) {
     console.error('JWT verification failed:', err)

@@ -15,8 +15,8 @@ export const login = createRoute({
     }
   },
   responses: {
-    201:{
-      description : "User logged in succesfully",
+    200:{
+      description : "Success",
       content: {
         "application/json":{
           schema : z.string().openapi({description:"JWT token"})
@@ -24,7 +24,7 @@ export const login = createRoute({
       }
     },
     400: {
-      description: 'Email and password required',
+      description: 'Bad request: Email and password required',
       content: {
         'text/plain': {
           schema: z.string()
@@ -63,7 +63,7 @@ export const verify = createRoute({
   path: '/verify',
   responses: {
     200: {
-      description: 'Verify JWT token and return user info',
+      description: 'Success',
       content: {
         "application/json": {
           schema: JWTSchema
