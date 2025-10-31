@@ -4,24 +4,27 @@ import auth from './routes/auth';
 
 const app = new OpenAPIHono();
 
-app.doc('/docs', {
+app.doc('/openapi.json', {
   openapi: '3.0.0',
   info: {
     version: '1.0.0',
     title: 'AMR Cloud Console',
   },
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-    },
-  },
-  security: [{ bearerAuth: [] }],
-} as any);
-app.get('/', swaggerUI({ url: '/docs' }))
+  // components: {
+  //   securitySchemes: {
+  //     OAuth2: {
+  //       type: "oauth2",
+  //       flows: {
+  //         password: {
+  //           tokenUrl: '/auth/login',
+  //           scopes: {}
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+});
+app.get('/', swaggerUI({ url: '/openapi.json'}))
 
 app.route('/auth', auth);
 

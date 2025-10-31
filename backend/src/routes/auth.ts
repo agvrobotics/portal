@@ -42,7 +42,10 @@ auth.openapi(login, async (c) => {
       .sign(SECRET)
 
     if (isApiClient(c)) {
-      return c.json( token , 200)
+      return c.json( {
+        access_token: token,
+        token_type: 'Bearer',
+      }, 200)
     }else{
       c.header(
         'Set-Cookie', 

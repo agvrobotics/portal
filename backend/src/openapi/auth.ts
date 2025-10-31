@@ -4,6 +4,7 @@ import { AccountSchema, LoginSchema } from './schemas/auth';
 export const login = createRoute({
   method: 'post',
   path: '/login',
+  tags: ['Authentication'],
   request: {
     body:{
       required: true,
@@ -19,7 +20,13 @@ export const login = createRoute({
       description : "Login Successfull",
       content: {
         "application/json":{
-          schema : z.string()
+          schema : z.union([
+            z.string(),
+            z.object({
+              access_token: z.string(),
+              token_type: z.string(),
+            })
+          ])
         }
       }
     },
@@ -61,7 +68,8 @@ export const login = createRoute({
 export const account = createRoute({
   method: 'get',
   path: '/account',
-  security: [{ bearerAuth: [] }],
+  tags: ['Authentication'],
+  security: [{ OAuth2: [] }],
   responses: {
     200: {
       description: 'Account information',
