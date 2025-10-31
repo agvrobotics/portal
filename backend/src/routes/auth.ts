@@ -1,18 +1,22 @@
-import { Hono } from 'hono';
+import { OpenAPIHono, z } from '@hono/zod-openapi';
 import { SignJWT, jwtVerify } from 'jose';
-import {Env} from '../types';
+//#######################################
+import {eq} from 'drizzle-orm'
 import {getDb} from '../db/engine/client';
 import {users} from '../db/schema';
-import {eq} from 'drizzle-orm'
+import {Env} from '../types';
+import {verify, login} from '../openapi/auth';
+import {LoginSchema, JWTSchema} from '../openapi/schemas/auth'
 
-const auth = new Hono<{ Bindings: Env }>()
+const auth = new OpenAPIHono<{ Bindings: Env }>()
 const SECRET = new TextEncoder().encode('super-secret-key')
 
 auth.get('/', (c) => c.text('Welcome to Authentication Service'))
 
-auth.post('/login', async (c) => {
+type LoginBody = z.infer<typeof LoginSchema>
+auth.openapi(login, async (c) => {
   try {
-    const body = await c.req.json<{ email?: string; password?: string }>()
+    const body = await c.req.json<LoginBody>()
     const { email, password } = body
 
     if (!email || !password) return c.text('Email and password required', 400);
@@ -24,7 +28,7 @@ auth.post('/login', async (c) => {
       .where(eq(users.email, email))
       .get();
 
-    if (!user) return c.text('This email is not associated with an account.', 404);
+    if (!user) return c.text('This email is not associated with an account', 404);
     if (user.password !== password) return c.text('Invalid credentials', 401);
     
 
@@ -33,14 +37,15 @@ auth.post('/login', async (c) => {
       .setExpirationTime('1h')
       .sign(SECRET)
 
-    return c.json({ token }, 200)
+    return c.json(token, 201)
   } catch (err) {
     console.error('Login error:', err)
-    return c.text('Server error', 500)
+    return c.text('Internal server error', 500)
   }
 })
 
-auth.get('/verify', async (c) => {
+type JWTPayload = z.infer<typeof JWTSchema>
+auth.openapi(verify, async (c) => {
   try {
     const cookieHeader = c.req.header('cookie')
     if (!cookieHeader) return c.text('Unauthorized: No cookies', 401)
@@ -49,15 +54,12 @@ auth.get('/verify', async (c) => {
     if (!match) return c.text('Unauthorized: No token found', 401)
 
     const token = match[1]
-    const { payload } = await jwtVerify(token, SECRET)
+    const { payload } = await jwtVerify(token, SECRET) as {payload : JWTPayload}
 
     return c.json({
-      message: 'Token valid',
-      user: {
-        email: payload.email,
         id: payload.id,
-      },
-    })
+        email: payload.email,
+    }, 200)
   } catch (err) {
     console.error('JWT verification failed:', err)
     return c.text('Unauthorized: Invalid token', 401)
