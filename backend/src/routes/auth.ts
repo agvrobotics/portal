@@ -1,4 +1,5 @@
 import { OpenAPIHono, z } from '@hono/zod-openapi';
+import {Context} from 'hono'
 import { SignJWT } from 'jose';
 import {eq} from 'drizzle-orm'
 //#######################################
@@ -12,6 +13,11 @@ import {LoginSchema} from '../openapi/schemas/auth'
 const auth = new OpenAPIHono<{ Bindings: Env ; Variables: Variables }>()
 const SECRET = new TextEncoder().encode('super-secret-key')
 
+function isApiClient(c: Context) {
+  const accept = c.req.header('accept') || ''
+  const userAgent = c.req.header('user-agent') || ''
+  return accept.includes('application/json') || userAgent.toLowerCase().includes('swagger')
+}
 type LoginBody = z.infer<typeof LoginSchema>
 auth.openapi(login, async (c) => {
   try {
@@ -35,16 +41,20 @@ auth.openapi(login, async (c) => {
       .setExpirationTime('1h')
       .sign(SECRET)
 
-    c.header(
-      'Set-Cookie', 
-      `token=${token}; 
-      HttpOnly; 
-      Secure; 
-      SameSite=Strict; 
-      Path=/; 
-      Max-Age=3600`
-    )
-    return c.json('Login Successful', 200)
+    if (isApiClient(c)) {
+      return c.json( token , 200)
+    }else{
+      c.header(
+        'Set-Cookie', 
+        `token=${token}; 
+        HttpOnly; 
+        Secure; 
+        SameSite=Strict; 
+        Path=/; 
+        Max-Age=3600`
+      )
+      return c.json('Login Successful', 200)
+    }
   } catch (err) {
     console.error('Login error:', err)
     return c.text('Internal server error', 500)

@@ -8,20 +8,25 @@ const SECRET = new TextEncoder().encode('super-secret-key')
 type Account = z.infer<typeof AccountSchema>
 export const authMiddleware = async (c: Context, next: Next) => {
   try {
+    let token: string | null = null
     const cookieHeader = c.req.header('cookie')
-    if (!cookieHeader) return c.text('Unauthorized: No cookies', 401)
-
-    const match = cookieHeader.match(/token=([^;]+)/)
-    if (!match) return c.text('Unauthorized: No token found', 401)
-
-    const token = match[1]
+    const authHeader = c.req.header('Authorization')
+    
+    if (authHeader?.startsWith('Bearer ')) {
+      token = authHeader.split(' ')[1]
+    }else if (cookieHeader) {
+      const match = cookieHeader.match(/token=([^;]+)/)
+      if (match) token = match[1]
+    }
+    if (!token) {
+      return c.text('Unauthorized: No token provided', 401)
+    }
     const { payload } = await jwtVerify(token, SECRET) as {payload: Account}
 
     c.set('user', {
       id: payload.id,
       email: payload.email,
     })
-
     await next()
   } catch (err) {
     console.error('JWT verification failed:', err)
