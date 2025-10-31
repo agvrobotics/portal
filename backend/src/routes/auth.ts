@@ -54,14 +54,10 @@ auth.openapi(login, async (c) => {
 
 auth.use('*', authMiddleware);
 
-type Account = z.infer<typeof AccountSchema>
 auth.openapi(account, async (c) => {
   try {
-    const user = c.get('user') as Account
-    return c.json({
-      id: user.id,
-      email: user.email,
-    }, 200)
+    const user = c.get('user')
+    return c.json(user, 200)
   } catch (err) {
     console.error('JWT verification failed:', err)
     return c.text('Unauthorized: Invalid token', 401)
