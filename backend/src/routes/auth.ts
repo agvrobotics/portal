@@ -7,7 +7,7 @@ import {users} from '../db/schema';
 import {Env, Variables} from '../types';
 import {authMiddleware} from './security';
 import {account, login} from '../openapi/auth';
-import {LoginSchema, AccountSchema} from '../openapi/schemas/auth'
+import {LoginSchema} from '../openapi/schemas/auth'
 
 const auth = new OpenAPIHono<{ Bindings: Env ; Variables: Variables }>()
 const SECRET = new TextEncoder().encode('super-secret-key')
