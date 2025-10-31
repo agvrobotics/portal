@@ -18,7 +18,7 @@ npx wrangler dev
 npx wrangler d1 create agv-db
 
 # Execute schema locally
-npx wrangler d1 execute agv-db --file=./src/db/schema.sql
+npx wrangler d1 execute agv-db --file=./schema.sql
 
 # Execute schema remotely
 npx wrangler d1 execute agv-db --remote --file=./schema.sql

@@ -1,6 +1,9 @@
-import { Hono } from 'hono'
-import { SignJWT, jwtVerify } from 'jose'
-import {Env} from '../types'
+import { Hono } from 'hono';
+import { SignJWT, jwtVerify } from 'jose';
+import {Env} from '../types';
+import {getDb} from '../db/engine/client';
+import {users} from '../db/schema';
+import {eq} from 'drizzle-orm'
 
 const auth = new Hono<{ Bindings: Env }>()
 const SECRET = new TextEncoder().encode('super-secret-key')
@@ -12,20 +15,18 @@ auth.post('/login', async (c) => {
     const body = await c.req.json<{ email?: string; password?: string }>()
     const { email, password } = body
 
-    if (!email || !password) {
-      return c.text('Email and password required', 400)
-    }
+    if (!email || !password) return c.text('Email and password required', 400);
+    
+    const db = getDb(c.env);
+    const user = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))
+      .get();
 
-    const stmt = c.env.DB.prepare('SELECT * FROM users WHERE email = ?')
-    const user = await stmt.bind(email).first()
-
-    if (!user) {
-      return c.text('This email is not associated with an account.', 404)
-    }
-
-    if (user.password !== password) {
-      return c.text('Invalid credentials', 401)
-    }
+    if (!user) return c.text('This email is not associated with an account.', 404);
+    if (user.password !== password) return c.text('Invalid credentials', 401);
+    
 
     const token = await new SignJWT({ email: user.email, id: user.id })
       .setProtectedHeader({ alg: 'HS256' })
